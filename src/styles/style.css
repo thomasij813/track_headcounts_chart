@@ -1,4 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 main {
-    max-width: 800px;
+    max-width: 400px;
     margin: auto;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin: 0px;
+}
+
+.subtitle {
+    margin: 0px;
+    font-size: 1.25rem;
+}
+
+svg {
+    margin: .75rem 0px;
+}
+
+text {
+    font-weight: 300;
 }

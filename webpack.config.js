@@ -2,8 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
-    mode: 'production',
-    entry: './src/scripts/index.js',
+    mode: 'development',
+    entry: ['@babel/polyfill', './src/scripts/index.js'],
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js'
@@ -13,7 +13,7 @@ const config = {
             test: /\.js$/,
             exclude: /node_modules/,
             use: {
-                loader: 'babel-loader'
+                loader: 'babel-loader',
             }
         }, {
             type: 'javascript/auto',
