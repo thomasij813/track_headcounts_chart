@@ -1,7 +1,7 @@
 import { select } from 'd3-selection'
 import { csv } from 'd3-fetch'
 import { scaleLinear, scalePoint} from 'd3-scale'
-import { group } from 'd3-array'
+import { group, sum } from 'd3-array'
 import { axisBottom } from 'd3-axis'
 import { randomUniform } from 'd3-random'
 
@@ -29,6 +29,12 @@ const axisG = svg.append('g')
 const drawChart = data => {
     const groupedData = Array.from(group(data, d => d.track))
         .map(d => ({track: d[0], sessions: d[1]}))
+        .map(d => {
+            d.totalHeadCount = sum(d.sessions, ds => ds.headcount)
+            return d
+        })
+
+    debugger
     
     const tracks = groupedData.map(d => d.track).sort()
 
@@ -48,12 +54,12 @@ const drawChart = data => {
     const xAxis = axisBottom(scaleHor).ticks(5)
 
     const text = g.selectAll('text')
-        .data(tracks)
+        .data(groupedData)
         .enter()
         .append('text')
-        .text(d => d)
+        .text(d => `${d.track} (${d.totalHeadCount})`)
         .attr('x', scaleHor(min))
-        .attr('y', d => scaleVer(d) - 15)
+        .attr('y', d => scaleVer(d.track) - 15)
 
     const lineSpacer = 0
 
